@@ -4,20 +4,20 @@
 \alias{createPrior}
 \title{Create a list with prior information.}
 \usage{
-createPrior(deterministic = TRUE, d)
+createPrior(noise = FALSE, d)
 }
 \arguments{
-\item{deterministic}{If the data is assumed to be noise-free, then
-\code{deterministic} should be \code{TRUE}. Otherwise, it should be
-\code{FALSE},}
+\item{noise}{If the data is assumed to be noise-free, then
+\code{noise} should be \code{FALSE}. Otherwise, it should be
+\code{TRUE},}
 
-\item{d}{The dimension of the training data.}
+\item{d}{The dimension of the training data (number of columns).}
 }
 \value{
 A list containing the default values for all the prior parameters.
 }
 \description{
-\code{getCorMat} returns a list that contains default values for the priors.
+\code{createPrior} returns a list that contains default values for the priors.
 }
 \details{
 This creates a list that contains default values for the priors. The user
@@ -26,6 +26,6 @@ can change the values as they like prior to inputting the list into
 }
 \examples{
 createPrior(d = 2)
-createPrior(deterministic = FALSE, d = 3)
+createPrior(noise = TRUE, d = 3)
 }
 \concept{preprocessing functions}

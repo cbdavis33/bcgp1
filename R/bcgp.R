@@ -19,38 +19,21 @@
 #' @family Major functions
 #' @examples
 #'
-#' createPrior(d = 2)
-#' createPrior(noise = TRUE, d = 3)
+#' xTrain <- matrix(runif(20, 0, 10), nrow = 10, ncol = 2)
+#' yTrain <- xTrain[, 1] + sin(xTrain[, 2])
+#' priors <- createPrior(noise = FALSE, d = 2)
+#' bcgp(xTrain, yTrain, priors)
 
 bcgp  <- function(xTrain, yTrain, priors = createPrior(noise = TRUE, d = ncol(xTrain)),
                   numUpdates = 5,
                   numAdapt = 1000,
                   burnin = 1000,
                   nmcmc = 10000){
-  priorList <- list(w = list(a = 0.5,
-                             b = 1.0,
-                             alpha = 1,
-                             beta = 1),
-                    rhoG = list(alpha = rep(1, d),
-                                beta = rep(1, d)),
-                    rhoL = list(alpha = rep(1, d),
-                                beta = rep(1, d)),
-                    muV = list(mu = -0.1,
-                               sig2 = 0.1),
-                    rhoV = list(alpha = rep(1, d),
-                                beta = rep(1, d)),
-                    sig2K = list(alpha = 2 + sqrt(0.1),
-                                 beta = 100/(1+sqrt(1/10))),
-                    tau2 = 0.08,
-                    epsV = 1e-10)
 
-  if(!noise){
-    priorList$sig2eps <- list(alpha = 1e-3,
-                              beta = 1e-3)
-  }else{
-    priorList$sig2eps <- list(alpha = 1e-1,
-                              beta = 1e-1)
-  }
+  y <- scale(yTrain, center = TRUE, scale = TRUE)
+  x <- apply(xTrain, 2, rescale)
 
-  return(priorList)
+  bfit <- new("bcgpfit",
+              )
+  return(bfit)
 }

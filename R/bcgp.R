@@ -64,6 +64,7 @@ bcgp  <- function(xTrain, yTrain, priors = "default", #createPrior(noise = TRUE,
   if(priors == "default"){
     priorList <- createPrior(XStd, noise = noise)
   }else if(is.list(priors)){
+    ## FIX: Check to make sure the prior list is in the correct form
     priorList <- priors
   }else{
     stop("Incorrect specification of prior parameter values. Either use
@@ -73,10 +74,11 @@ bcgp  <- function(xTrain, yTrain, priors = "default", #createPrior(noise = TRUE,
   if(init == "random"){
     initList <- createInit(XStd, priors = priorList, chains = chains)
   }else if(is.list(priors)){
-    priorList <- priors
+    ## FIX: Check to make sure the prior list is in the correct form
+    initList <- init
   }else{
-    stop("Incorrect specification of prior parameter values. Either use
-         'default' or try calling createPrior() for correct specification.")
+    stop("Incorrect specification of initial parameter values. Either use
+         'random' or try calling createInit() for correct specification.")
   }
 
   bcgpMCMC(X = XStd, y = yStd, priors = priorList, inits = inits)

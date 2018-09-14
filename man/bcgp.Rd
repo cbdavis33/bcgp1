@@ -4,16 +4,23 @@
 \alias{bcgp}
 \title{Draw samples from a bcgp model}
 \usage{
-bcgp(xTrain, yTrain, priors = createPrior(noise = TRUE, d =
-  ncol(xTrain)), numUpdates = 5, numAdapt = 1000, burnin = 1000,
-  nmcmc = 10000)
+bcgp(xTrain, yTrain, priors = "default", numUpdates = 5,
+  numAdapt = 1000, burnin = 1000, nmcmc = 10000, chains = 4,
+  cores = getOption("mc.cores", 1L), init = "random", noise = FALSE)
 }
 \arguments{
 \item{xTrain}{An \code{n x d} matrix containing the independent variables
 in the training set.}
 
-\item{yTrain}{Avector containing the observed response values in the training
+\item{yTrain}{A vector containing the observed response values in the training
 set.}
+
+\item{priors}{Can be either the string "default" or a list containing the values
+for the prior parameters.
+
+\code{priors = "default"} (default):
+The initial values will be generated randomly from their respective prior
+distributions.}
 
 \item{numUpdates}{The number of updates in the proposal stepsize adaptation phase.}
 
@@ -23,7 +30,24 @@ adaptation phase.}
 \item{burnin}{The number of burnin samples to discard after the stepsize
 adaptation phase is finished}
 
-\item{prior}{A list containing the values for the prior parameters.}
+\item{nmcmc}{The number of samples to be kept for each Markov chain.}
+
+\item{chains}{The number of Markov chains. The default is 4.}
+
+\item{init}{Can be either the string "random" or a list of length \code{chains}.
+The elements of this list should be named lists, where each of these has the
+name of a parameter and is used to specify the initial values for that parameter
+for the corresponding chain.
+
+\describe{
+\code{init = "random"} (default):
+The initial values will be generated randomly from their respective prior
+distributions.
+
+inits via list:
+Set initial values by providing a list equal in length to the number of Markov
+chains. A call to createInit() will assist in the correct creation of this list.
+}}
 }
 \value{
 An object of S4 class \code{bcgp} representing the fitted results.
@@ -38,8 +62,13 @@ Composite Gaussian Process (BCGP) model.
 \examples{
 
 xTrain <- matrix(runif(20, 0, 10), nrow = 10, ncol = 2)
-yTrain <- x1 + sin(x2)
+yTrain <- xTrain[, 1] + sin(xTrain[, 2])
 priors <- createPrior(noise = FALSE, d = 2)
 bcgp(xTrain, yTrain, priors)
+}
+\seealso{
+\code{\link{createPrior}} \code{\link{createInit}}
+
+Other Major functions: \code{\link{bcgpMCMC}}
 }
 \concept{Major functions}

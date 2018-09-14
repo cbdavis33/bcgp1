@@ -6,17 +6,20 @@
 #' can change the values as they like prior to inputting the list into
 #' \code{bcgp}.
 #'
+#' @param xTrain An \code{n x d} matrix containing the independent variables
+#' in the training set.
 #' @param noise If the data is assumed to be noise-free, then
 #' \code{noise} should be \code{FALSE}. Otherwise, it should be
 #' \code{TRUE},
-#' @param d The dimension of the training data (number of columns).
 #' @return A list containing the default values for all the prior parameters.
 #' @family preprocessing functions
 #' @examples
-#' createPrior(d = 2)
-#' createPrior(noise = TRUE, d = 3)
+#' xTrain <- matrix(runif(40), ncol= 4, nrow = 10)
+#' createPrior(xTrain)
+#' createPrior(xTrain, noise = TRUE)
 
-createPrior  <- function(noise = FALSE, d){
+createPrior  <- function(xTrain, noise = FALSE){
+  d <- ncol(xTrain)
   priorList <- list(w = list(a = 0.5,
                              b = 1.0,
                              alpha = 1,

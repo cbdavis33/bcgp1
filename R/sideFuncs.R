@@ -11,11 +11,9 @@ initFunc <- function(initList, priors, xTrain){
                                    scale = priors$sig2eps$beta))
   initReturn$muV <- rnorm(1, priors$muV$mu, sqrt(priors$muV$sig2))
   initReturn$rhoV <- rbeta(d, priors$rhoV$alpha, priors$rhoV$beta)
-  ## FIX?: The values for sig2K seem very big
-  initReturn$sig2K <- 1/rgamma(1, priors$sig2K$alpha, priors$sig2K$beta)
-  ## FIX?: The initial log GP for sig2X  still needs sampled. MATLAB code is below
+  initReturn$sig2K <- 1/rgamma(1, priors$sig2K$alpha, scale = priors$sig2K$beta)
   K <- initReturn$sig2K * getCorMat(xTrain,initReturn$rhoV) + priors$epsV*diag(nrow(xTrain))
-  initList$Vt <- exp(MASS::mvrnorm(1, initList$muV, K))
+  initReturn$V <- exp(MASS::mvrnorm(1, initReturn$muV*rep(1, nrow(xTrain)), K))
   return(initReturn)
 
 }

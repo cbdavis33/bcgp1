@@ -23,11 +23,6 @@
 
 createInit  <- function(xTrain, priors = createPrior(xTrain), chains = 4){
   initList <- vector("list", length = chains)
-  initList <- lapply(initList, initFunc, priors = priors, xTrain = XStd)
-  # K = initVals.sig2K * getGPredC(train.xt,initVals.rhoV);
-  # K = K + initVals.epsV*eye(size(K,1));
-  # initVals.Vt = exp(mvnrnd(initVals.muV*ones(size(K,1),1),K))';
-  K <- initList$sig2K * getCorMat(xTrain,initList$rhoV) + priors$epsV*diag(ncol(xTrain))
-  initList$Vt <- exp(MASS::mvrnorm(1, initList$muV, K))
+  initList <- lapply(initList, initFunc, priors = priors, xTrain = xTrain)
   return(initList)
 }

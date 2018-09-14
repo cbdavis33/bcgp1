@@ -55,13 +55,23 @@ bcgp  <- function(xTrain, yTrain, priors = "default", #createPrior(noise = TRUE,
                   nmcmc = 10000,
                   chains = 4,
                   cores = getOption("mc.cores", 1L),
-                  init = "random")#,noise = FALSE){
+                  init = "random",
+                  noise = FALSE){
 
   yStd <- scale(yTrain, center = TRUE, scale = TRUE)
   XStd <- apply(xTrain, 2, rescale)
 
   if(priors == "default"){
-    priorList <- createPrior(noise = noise, d = ncol(xTrain))
+    priorList <- createPrior(XStd, noise = noise)
+  }else if(is.list(priors)){
+    priorList <- priors
+  }else{
+    stop("Incorrect specification of prior parameter values. Either use
+         'default' or try calling createPrior() for correct specification.")
+  }
+
+  if(init == "random"){
+    initList <- createInit(XStd, priors = priorList, chains = chains)
   }else if(is.list(priors)){
     priorList <- priors
   }else{
@@ -71,7 +81,7 @@ bcgp  <- function(xTrain, yTrain, priors = "default", #createPrior(noise = TRUE,
 
   bcgpMCMC(X = XStd, y = yStd, priors = priorList, inits = inits)
 
-  bfit <- new("bcgpfit",
-              )
+  # bfit <- new("bcgpfit",
+  #             )
   return(bfit)
 }

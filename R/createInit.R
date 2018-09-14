@@ -23,6 +23,6 @@
 
 createInit  <- function(xTrain, priors = createPrior(xTrain), chains = 4){
   initList <- vector("list", length = chains)
-  lapply(initList, initFunc, priors)
+  initList <- lapply(initList, initFunc, priors)
   return(initList)
 }

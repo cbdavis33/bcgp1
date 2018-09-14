@@ -1,4 +1,4 @@
-initFunc <- function(preList, priors){
+initFunc <- function(initList, priors){
 
   d <- length(priors$rhoG$alpha)
   initReturn <- vector("list")
@@ -6,6 +6,6 @@ initFunc <- function(preList, priors){
   initReturn$w <- priors$w$a + rbeta(1, priors$w$alpha, priors$w$beta)*(priors$w$b - priors$w$a)
   initReturn$rhoG <- rbeta(d, priors$rhoG$alpha, priors$rhoG$beta)
 
-  return(preList)
+  return(initReturn)
 
 }

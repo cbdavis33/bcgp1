@@ -58,11 +58,8 @@ bcgp  <- function(xTrain, yTrain, priors = "default", #createPrior(noise = TRUE,
                   init = "random",
                   noise = FALSE){
 
-  yStd <- scale(yTrain, center = TRUE, scale = TRUE)
-  XStd <- apply(xTrain, 2, rescale)
-
   if(priors == "default"){
-    priorList <- createPrior(XStd, noise = noise)
+    priorList <- createPrior(xTrain, noise = noise)
   }else if(is.list(priors)){
     ## FIX: Check to make sure the prior list is in the correct form
     priorList <- priors
@@ -72,7 +69,7 @@ bcgp  <- function(xTrain, yTrain, priors = "default", #createPrior(noise = TRUE,
   }
 
   if(init == "random"){
-    initList <- createInit(XStd, priors = priorList, chains = chains)
+    initList <- createInit(xTrain, priors = priorList, chains = chains)
   }else if(is.list(priors)){
     ## FIX: Check to make sure the prior list is in the correct form
     initList <- init
@@ -81,7 +78,7 @@ bcgp  <- function(xTrain, yTrain, priors = "default", #createPrior(noise = TRUE,
          'random' or try calling createInit() for correct specification.")
   }
 
-  bcgpMCMC(X = XStd, y = yStd, priors = priorList, inits = inits)
+  bcgpMCMC(xTrain = xTrain, yTrain = yTrain, priors = priorList, inits = initList)
 
   # bfit <- new("bcgpfit",
   #             )

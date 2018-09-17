@@ -33,9 +33,7 @@ createPrior  <- function(xTrain, noise = FALSE){
                     rhoV = list(alpha = rep(1, d),
                                 beta = rep(1, d)),
                     sig2K = list(alpha = 2 + sqrt(0.1),
-                                 beta = 100/(1+sqrt(1/10))),
-                    tau2 = 0.08,
-                    epsV = 1e-10)
+                                 beta = 100/(1+sqrt(1/10))))
 
   if(!noise){
     priorList$sig2eps <- list(alpha = 1e-3,

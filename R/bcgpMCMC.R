@@ -24,11 +24,14 @@
 #' priors <- createPrior(noise = FALSE, d = 2)
 #' bcgp(xTrain, yTrain, priors)
 
-bcgpMCMC  <- function(X, y, priors, numUpdates, numAdapt,
+bcgpMCMC  <- function(xTrain, yTrain, priors, numUpdates, numAdapt,
                       burnin, nmcmc, inits){
 
   y <- scale(yTrain, center = TRUE, scale = TRUE)
-  x <- apply(xTrain, 2, rescale)
+  X <- apply(xTrain, 2, rescale)
+
+  epsV <- 1e-10
+  tau2 <- 0.08
 
   bfit <- new("bcgpfit",
   )

@@ -31,6 +31,8 @@ createPrior(xTrain)
 createPrior(xTrain, noise = TRUE)
 }
 \seealso{
+\code{\link{bcgp}}
+
 Other preprocessing functions: \code{\link{createInit}}
 }
 \concept{preprocessing functions}

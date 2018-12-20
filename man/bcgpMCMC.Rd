@@ -4,11 +4,12 @@
 \alias{bcgpMCMC}
 \title{Draw samples from a bcgp model}
 \usage{
-bcgpMCMC(X, y, priors, numUpdates, numAdapt, burnin, nmcmc, inits)
+bcgpMCMC(xTrain, yTrain, priors, inits, numUpdates, numAdapt, burnin,
+  nmcmc)
 }
 \arguments{
-\item{X}{An \code{n x d} matrix containing the independent variables
-in the training set.}
+\item{yTrain}{Avector containing the observed response values in the training
+set.}
 
 \item{numUpdates}{The number of updates in the proposal stepsize adaptation phase.}
 
@@ -18,8 +19,8 @@ adaptation phase.}
 \item{burnin}{The number of burnin samples to discard after the stepsize
 adaptation phase is finished}
 
-\item{yTrain}{Avector containing the observed response values in the training
-set.}
+\item{X}{An \code{n x d} matrix containing the independent variables
+in the training set.}
 
 \item{prior}{A list containing the values for the prior parameters.}
 }

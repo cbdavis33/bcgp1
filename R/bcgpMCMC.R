@@ -24,8 +24,8 @@
 #' priors <- createPrior(noise = FALSE, d = 2)
 #' bcgp(xTrain, yTrain, priors)
 
-bcgpMCMC  <- function(xTrain, yTrain, priors, numUpdates, numAdapt,
-                      burnin, nmcmc, inits){
+bcgpMCMC  <- function(xTrain, yTrain, priors, inits, numUpdates, numAdapt,
+                      burnin, nmcmc){
 
   y <- scale(yTrain, center = TRUE, scale = TRUE)
   X <- apply(xTrain, 2, rescale)

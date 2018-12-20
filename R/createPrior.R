@@ -13,6 +13,7 @@
 #' \code{TRUE},
 #' @return A list containing the default values for all the prior parameters.
 #' @family preprocessing functions
+#' @seealso \code{\link{bcgp}}
 #' @examples
 #' xTrain <- matrix(runif(40), ncol= 4, nrow = 10)
 #' createPrior(xTrain)

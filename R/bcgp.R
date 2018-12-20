@@ -52,6 +52,7 @@
 #' yTrain <- xTrain[, 1] + sin(xTrain[, 2])
 #' priors <- createPrior(noise = FALSE, d = 2)
 #' bcgp(xTrain, yTrain, priors)
+#' @export
 
 bcgp  <- function(xTrain, yTrain, priors = "default", #createPrior(noise = TRUE, d = ncol(xTrain)),
                   inits = "random",

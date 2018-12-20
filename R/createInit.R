@@ -20,6 +20,7 @@
 #' xTrain <- matrix(runif(40), ncol= 4, nrow = 10)
 #' createInit(xTrain)
 #' createInit(xTrain, priors = createPrior(xTrain, noise = TRUE), chains = 2)
+#' @export
 
 createInit  <- function(xTrain, priors = createPrior(xTrain), chains = 4){
   initList <- vector("list", length = chains)

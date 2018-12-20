@@ -18,6 +18,7 @@
 #' xTrain <- matrix(runif(40), ncol= 4, nrow = 10)
 #' createPrior(xTrain)
 #' createPrior(xTrain, noise = TRUE)
+#' @export
 
 createPrior  <- function(xTrain, noise = FALSE){
   d <- ncol(xTrain)

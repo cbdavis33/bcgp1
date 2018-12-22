@@ -38,7 +38,7 @@ Composite Gaussian Process (BCGP) model.
 
 xTrain <- matrix(runif(20, 0, 10), nrow = 10, ncol = 2)
 yTrain <- xTrain[, 1] + sin(xTrain[, 2])
-priors <- createPrior(noise = FALSE, d = 2)
+priors <- createPriors(noise = FALSE, d = 2)
 bcgp(xTrain, yTrain, priors)
 }
 \seealso{

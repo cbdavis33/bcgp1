@@ -1,6 +1,6 @@
 #' Create a list with prior information.
 #'
-#' \code{createPrior} returns a list that contains default values for the priors.
+#' \code{createPriors} returns a list that contains default values for the priors.
 #'
 #' This creates a list that contains default values for the priors. The user
 #' can change the values as they like prior to inputting the list into
@@ -16,11 +16,11 @@
 #' @seealso \code{\link{bcgp}}
 #' @examples
 #' xTrain <- matrix(runif(40), ncol= 4, nrow = 10)
-#' createPrior(xTrain)
-#' createPrior(xTrain, noise = TRUE)
+#' createPriors(xTrain)
+#' createPriors(xTrain, noise = TRUE)
 #' @export
 
-createPrior  <- function(xTrain, noise = FALSE){
+createPriors  <- function(xTrain, noise = FALSE){
   d <- ncol(xTrain)
   priorList <- list(w = list(a = 0.5,
                              b = 1.0,

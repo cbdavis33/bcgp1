@@ -1,6 +1,6 @@
 #' Create a list with initial values.
 #'
-#' \code{createInit} returns a list that contains randomly generated initial
+#' \code{createInits} returns a list that contains randomly generated initial
 #' values.
 #'
 #' This creates a list of length \code{chains} that contains randomly generated
@@ -18,11 +18,11 @@
 #' @seealso \code{\link{bcgp}}
 #' @examples
 #' xTrain <- matrix(runif(40), ncol= 4, nrow = 10)
-#' createInit(xTrain)
-#' createInit(xTrain, priors = createPrior(xTrain, noise = TRUE), chains = 2)
+#' createInits(xTrain)
+#' createInits(xTrain, priors = createPriors(xTrain, noise = TRUE), chains = 2)
 #' @export
 
-createInit  <- function(xTrain, priors = createPrior(xTrain), chains = 4){
+createInits  <- function(xTrain, priors = createPriors(xTrain), chains = 4){
   initList <- vector("list", length = chains)
   initList <- lapply(initList, initFunc, priors = priors, xTrain = xTrain)
   return(initList)

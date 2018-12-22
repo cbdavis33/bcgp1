@@ -39,7 +39,7 @@ distributions.
 
 \code{inits} via list:
 Set initial values by providing a list equal in length to the number of Markov
-chains. A call to \code{createInit()} will assist in the correct creation of this list.
+chains. A call to \code{createInits()} will assist in the correct creation of this list.
 }}
 
 \item{numUpdates}{The number of updates in the proposal stepsize adaptation phase.}
@@ -68,11 +68,11 @@ Composite Gaussian Process (BCGP) model.
 
 xTrain <- matrix(runif(20, 0, 10), nrow = 10, ncol = 2)
 yTrain <- xTrain[, 1] + sin(xTrain[, 2])
-priors <- createPrior(noise = FALSE, d = 2)
+priors <- createPriors(noise = FALSE, d = 2)
 bcgp(xTrain, yTrain, priors)
 }
 \seealso{
-\code{\link{createPrior}} \code{\link{createInit}}
+\code{\link{createPriors}} \code{\link{createInits}}
 
 Other Major functions: \code{\link{bcgpMCMC}}
 }
